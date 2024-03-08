@@ -1,0 +1,34 @@
+---
+- name: "Make sure dnf-automatic is installed"
+  ansible.builtin.yum:
+    name: dnf-automatic
+    state: present
+
+- name: Make sure dnf-automatic configuration file is up to date
+  ansible.builtin.template:
+    src: automatic.conf.j2
+    dest: /etc/dnf/automatic.conf
+    mode: 0644
+
+- name: Make sure dnf-automatic.timer.d directory exists
+  ansible.builtin.file:
+    path: /etc/systemd/system/dnf-automatic.timer.d/
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Make sure dnf-automatic.timer override exists
+  ansible.builtin.template:
+    src: dnf-automatic.timer.overide.conf.j2
+    dest: /etc/systemd/system/dnf-automatic.timer.d/override.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify: Reload systemd
+
+- name: Make sure a timer unit for dnf-automatic is enabled
+  ansible.builtin.service:
+    name: dnf-automatic.timer
+    state: started
+    enabled: true

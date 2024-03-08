@@ -1,0 +1,7 @@
+---
+- name: Test new role from within this playbook
+  hosts: all
+  gather_facts: true
+  roles:
+    - omegapoint.provisioning.auto_update
+  tasks:

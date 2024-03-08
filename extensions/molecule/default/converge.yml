@@ -1,0 +1,7 @@
+---
+- name: Converge
+  hosts: all
+  gather_facts: true
+
+- name: Include a playbook from a collection
+  ansible.builtin.import_playbook: omegapoint.provisioning.my_playbook
