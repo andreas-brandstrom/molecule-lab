@@ -5,7 +5,7 @@ driver:
   name: docker
 platforms:
   - name: host1
-    image: skandikon.se/almalinux9-ansible-molecule
+    image: omegapoint.se/almalinux9-ansible-molecule
     command: ${MOLECULE_DOCKER_COMMAND:-""}
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:rw

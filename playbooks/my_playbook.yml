@@ -1,5 +1,5 @@
 ---
-- name: Test new role from within this playbook
+- name: My molecule lab playbok
   hosts: all
   gather_facts: true
   roles:
